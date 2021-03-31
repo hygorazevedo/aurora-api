@@ -8,12 +8,10 @@ const RequiredString = { type: String, required: true, createIndex: { unique: tr
 
 const ProductSchema = new Schema(
     {
-        _id: Schema.Types.ObjectId,
         name: RequiredString,
         productTypeId: { type: Schema.Types.ObjectId, ref: TipoProduto },
-        color: { type: Schema.Types.ObjectId, ref: CorProduto }
-    },
-    { _id: false, autoIndex: false }
+        productColorId: { type: Schema.Types.ObjectId, ref: CorProduto }
+    }
 );
 
 const Produto = mongoose.model('products', ProductSchema);

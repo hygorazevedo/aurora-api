@@ -1,7 +1,7 @@
 const express = require('express');
-const productsController = require('./create-product/products.controller');
-const productColorsController = require('./create-product-color/product-colors.controller');
-const productTypesController = require('./create-product-type/product-types.controller');
+const productsController = require('./products/products.controller');
+const productColorsController = require('./product-colors/product-colors.controller');
+const productTypesController = require('./product-types/product-types.controller');
 
 const baseController = express.Router();
 

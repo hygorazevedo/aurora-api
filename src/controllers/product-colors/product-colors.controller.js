@@ -24,7 +24,7 @@ productColosController.post('/productColors', async (request, response) => {
         hexadecimal: productColorRequest.Hexadecimal
     });
 
-    return response.status(200).json(productColor);
+    return response.status(201).json(productColor);
 });
 
 module.exports = productColosController;

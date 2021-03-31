@@ -21,7 +21,7 @@ productTypesController.post('/productTypes', async (request, response) => {
 
     const productType = await productTypeService.addProductType({ description: productTypeRequest.Description });
 
-    return response.status(200).json(productType);
+    return response.status(201).json(productType);
 });
 
 module.exports = productTypesController;

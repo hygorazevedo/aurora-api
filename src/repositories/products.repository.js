@@ -15,12 +15,7 @@ module.exports = productRepository = {
 
         await product.save();
 
-        return {
-            id: product._id,
-            name: product.name,
-            productTypeId: product.productTypeId,
-            productColorId: product.productColorId
-        }
+        return product._id;
     },
 
     getProducts: async function (productType) {

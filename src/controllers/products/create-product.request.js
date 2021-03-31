@@ -21,12 +21,12 @@ class Request {
 class CreateProductRequest extends Request {
     Name;
     ProductTypeId;
-    Color;
+    ProductColorId;
 
-    constructor(name, productTypeId, color) {
+    constructor(name, productTypeId, productColorId) {
         super();
 
-        this.Validate(name, productTypeId, color);
+        this.Validate(name, productTypeId, productColorId);
 
         if (this.Validations.length > 0) {
             return;
@@ -34,7 +34,7 @@ class CreateProductRequest extends Request {
 
         this.Name = name;
         this.ProductTypeId = productTypeId;
-        this.Color = color;
+        this.ProductColorId = productColorId;
     }
 }
 

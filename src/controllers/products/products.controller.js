@@ -1,6 +1,8 @@
 const express = require('express');
 const CreateProductRequest = require('./create-product.request');
 const productRepository = require('../../repositories/products.repository');
+const productColorsRepository = require('../../repositories/product-colors.repository');
+const productTypesRepository = require('../../repositories/product-types.repository');
 const productService = require('../../services/create-product.service');
 
 const productsController = express.Router();
@@ -8,7 +10,12 @@ const productsController = express.Router();
 productsController.get('/products', async (request, response) => {
     const { productType } = request.query;
 
-    if (!productType || !productRepository.validateObjectId(productType)) {
+    if (!productType) {
+        return response.status(200).json([]);
+    }
+    
+    const type = await productTypesRepository.findProductTypeById(productType);
+    if (!type) {
         return response.status(200).json([]);
     }
 
@@ -16,25 +23,25 @@ productsController.get('/products', async (request, response) => {
     if (!products) {
         return response.status(200).json([]);
     }
-
+    
     return response.status(200).json(products);
 });
 
 productsController.post('/products', async (request, response) => {
-    const { name, productType, color } = request.body;
-    const productRequest = new CreateProductRequest(name, productType, color);
+    const { name, productTypeId, productColorId } = request.body;
+    const productRequest = new CreateProductRequest(name, productTypeId, productColorId);
 
     if (productRequest.Validations.length > 0) {
         return response.status(412).json({ validations: productRequest.Validations });
     }
 
-    await productService.addProduct({ 
+    const product = await productService.addProduct({ 
         name: productRequest.Name, 
-        productType: productRequest.ProductTypeId, 
-        color: productRequest.Color
+        productTypeId: productRequest.ProductTypeId, 
+        productColorId: productRequest.ProductColorId
     });
 
-    return response.status(201).json({});
+    return response.status(201).json(product);
 });
 
 module.exports = productsController;
