@@ -1,8 +1,6 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const CorProduto = require('./models/product-color.model');
-
-process.env.USER = 'aurura_admin_dev';
-process.env.PASSWORD = 'aurorawomandev'
 
 mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@developcluster.xykrk.mongodb.net/aurora_db`, {useNewUrlParser: true, useUnifiedTopology: true});
 
